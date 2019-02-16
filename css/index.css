@@ -1,0 +1,292 @@
+@charset "utf-8";
+/* CSS Document */
+
+#wrap{
+	background: #86D1DB;
+	width: 100%;
+	height: 100vh;
+	/* height: 100%; は、中のコンテンツは absolute なのでブロックとして存在してないから、
+	高さが取得できなくなっちゃう。100vhでいいと思う。 */
+	position: relative;
+	font-family: 'Josefin Sans', sans-serif;
+	overflow: hidden;
+}
+
+header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left:0;
+}
+
+.top_logo{
+	/*background:#764070;*/
+	/*サイズ確認用背景*/
+	
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+}
+
+.top_logo img {
+	width: 30vh;
+}
+
+nav{
+	/*background:#767070;*/
+	/* color: #FFFFFF; */
+	/* margin: 0 auto; */
+	/* aタグしかないので、colorは不要。marginも、上記同様横幅がないので不要。 */
+	padding: 4%;
+}
+
+nav ul li{
+	/* line-height: 3em; */
+	/* 単位がなかったよ。line-heightと display:block;　を一緒に使うと、
+	li 自体が block 化されてしまって、aタグをblock化すると li いっぱいに、
+	要素が伸びてしまうから、li を離すときは margin がいいかな。 */
+	display: block;
+	/* display: block;も外せばわかるけど、li は元からblock要素を持ってるから、わざわざ指定しなくてもいい。 */
+	margin: 0 0 5vh 0;
+	/* margin は　上・右・下・左　の順番で書いていくので、今回は、下margin40px という感じ。 */
+	/* padding: 8px; */
+	/* li において padding は装飾しない限りほぼ無益。互いを離すなら、margin。aタグを伸ばすなら、aタグにpadding。 */
+	text-align: center;
+	/* margin: 0 auto; */
+	/* 横幅が〜 */
+}
+nav ul li:last-child{
+	margin: 0;
+	/* 最後の li だけ margin はいらないから、
+	擬似クラスの　:last-child(最後だけって意味)で、
+	margin:0; にすると、最後の margin だけ消えるよ。
+	ここを全部消して、サイトを見ればわかるけど、
+	気持ち全体的に上にあるような違和感を感じると思う。
+	それを無くすため。 */
+}
+
+nav a {
+	color: #fff;
+	/* a タグに color バッチリ！ */
+	text-decoration: none;
+	/* これもバッチリ。 */
+	font-size: 5vh;
+	/* aタグに入れても変わらないよ。どっちでも！ */
+	display: block;
+	padding: 10px 5px;
+	/* a タグの領域を少し広げたいから、aタグはinline要素なので、
+	block化して、paddingで広げるよ。line-height でも可能。
+	li は見た目の幅や装飾。　a では、内部のLinkの広さの指定 で分けると覚えやすいよ。 */
+}
+
+/* navは一箇所にまとめて。 */
+/* プロパティ値の前に半角スペースは見やすくて綺麗。全てに統一できるまで癖づけよう */
+
+.copy{
+	position: absolute;
+	bottom: 1%;
+	display: block;
+	width: 100%;
+	color: white;
+	font-size: 1vh;
+	letter-spacing: .1em;
+	text-align: center;
+}
+/* 新しく追加したコピーライトは、header が absolute　かかってて上に行っちゃうので
+こいつも absolute で下に固定しちゃおう。 */
+
+
+@media screen and (min-height: 700px){
+	.top_logo img {
+		width: 260px;
+	}
+	nav a {
+		font-size: 2rem;
+		margin: 0 0 50px 0;
+	}
+	.copy{
+		font-size: 1em;
+	}
+}
+
+/* min-height: 700px
+は、ウィンドウの高さが、700px以上になった時にどうするかを指定する。
+font-sizeが vh で指定されてるので、めちゃめちゃでかい画面だとすんごい大きくなっちゃう。
+高さが700px超えたら、通常の大きさに戻すってやり方。
+高さ変えても、横幅変えてもすっぽり収まる。 */
+
+
+/*スマホ用media screen*/
+@media screen and (max-width : 500px ){
+	.top_logo img {
+		width: 30vh;
+		max-width: 150px;
+		/* 基本的な横幅は 30vh 高さで変わるようにして、
+		最大は150pxに設定する。そうすると、可変式で高さが変わるけど、最大の150px以上は行かない。
+		ここまで書き込む必要はないよ！動きを見て欲しいのでわざわざ細かく書いてます。
+		本当は無料サーバーかどこかにアップしながら、スマホでテストが一番よいよ。 */
+	}
+	nav ul li {
+		margin: 0 0 5vh 0;
+	}
+	nav a {
+		font-size: 16px;
+	}
+}
+
+/* max-height: 500px
+は、ウィンドウの幅が、500px以上になった時にどうするかを指定する。
+font-sizeが vhなのでスマホだとめっちゃ小さい。だから px で固定してあげる。
+幅が500px切ったら、スマホ対応型にする。これがレスポンシブ。
+さっきの縦を残しておけば、でかい画面で見ると、普通になって、
+縦に潰せば、 vh だから高さと一緒に縮んでくれる。
+横に縮めれば、スマホ対応。縦に長すぎるスマホはないから、このぐらいの大きさやなって感じで決めちゃえばいい。 */
+
+/*以下about*/
+
+#wrap{
+	background: #86D1DB;
+	width: 100%;
+	height: 100vh;
+	/* height: 100%; は、中のコンテンツは absolute なのでブロックとして存在してないから、
+	高さが取得できなくなっちゃう。100vhでいいと思う。 */
+	position: relative;
+	font-family: 'Josefin Sans', sans-serif;
+	overflow: hidden;
+}
+
+header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left:0;
+}
+
+.top_logo{
+	/*background:#764070;*/
+	/*サイズ確認用背景*/
+
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+}
+
+.top_logo img {
+	width: 30vh;
+}
+
+nav{
+	/*background:#767070;*/
+	/* color: #FFFFFF; */
+	/* margin: 0 auto; */
+	/* aタグしかないので、colorは不要。marginも、上記同様横幅がないので不要。 */
+	background: #9F484A
+	width: 50px;
+	height: 100%;
+	padding: 4%;
+}
+
+nav ul li{
+	/* line-height: 3em; */
+	/* 単位がなかったよ。line-heightと display:block;　を一緒に使うと、
+	li 自体が block 化されてしまって、aタグをblock化すると li いっぱいに、
+	要素が伸びてしまうから、li を離すときは margin がいいかな。 */
+	display: block;
+	/* display: block;も外せばわかるけど、li は元からblock要素を持ってるから、わざわざ指定しなくてもいい。 */
+	margin: 0 0 5vh 0;
+	/* margin は　上・右・下・左　の順番で書いていくので、今回は、下margin40px という感じ。 */
+	/* padding: 8px; */
+	/* li において padding は装飾しない限りほぼ無益。互いを離すなら、margin。aタグを伸ばすなら、aタグにpadding。 */
+	text-align: center;
+	/* margin: 0 auto; */
+	/* 横幅が〜 */
+}
+nav ul li:last-child{
+	margin: 0;
+	/* 最後の li だけ margin はいらないから、
+	擬似クラスの　:last-child(最後だけって意味)で、
+	margin:0; にすると、最後の margin だけ消えるよ。
+	ここを全部消して、サイトを見ればわかるけど、
+	気持ち全体的に上にあるような違和感を感じると思う。
+	それを無くすため。 */
+}
+
+nav a {
+	color: #fff;
+	/* a タグに color バッチリ！ */
+	text-decoration: none;
+	/* これもバッチリ。 */
+	font-size: 5vh;
+	/* aタグに入れても変わらないよ。どっちでも！ */
+	display: block;
+	padding: 10px 5px;
+	/* a タグの領域を少し広げたいから、aタグはinline要素なので、
+	block化して、paddingで広げるよ。line-height でも可能。
+	li は見た目の幅や装飾。　a では、内部のLinkの広さの指定 で分けると覚えやすいよ。 */
+}
+
+/* navは一箇所にまとめて。 */
+/* プロパティ値の前に半角スペースは見やすくて綺麗。全てに統一できるまで癖づけよう */
+
+.copy{
+	position: absolute;
+	bottom: 1%;
+	display: block;
+	width: 100%;
+	color: white;
+	font-size: 1vh;
+	letter-spacing: .1em;
+	text-align: center;
+}
+/* 新しく追加したコピーライトは、header が absolute　かかってて上に行っちゃうので
+こいつも absolute で下に固定しちゃおう。 */
+
+
+@media screen and (min-height: 700px){
+	.top_logo img {
+		width: 260px;
+	}
+	nav a {
+		font-size: 2rem;
+		margin: 0 0 50px 0;
+	}
+	.copy{
+		font-size: 1em;
+	}
+}
+
+/* min-height: 700px
+は、ウィンドウの高さが、700px以上になった時にどうするかを指定する。
+font-sizeが vh で指定されてるので、めちゃめちゃでかい画面だとすんごい大きくなっちゃう。
+高さが700px超えたら、通常の大きさに戻すってやり方。
+高さ変えても、横幅変えてもすっぽり収まる。 */
+
+
+/*スマホ用media screen*/
+@media screen and (max-width : 500px ){
+	.top_logo img {
+		width: 30vh;
+		max-width: 150px;
+		/* 基本的な横幅は 30vh 高さで変わるようにして、
+		最大は150pxに設定する。そうすると、可変式で高さが変わるけど、最大の150px以上は行かない。
+		ここまで書き込む必要はないよ！動きを見て欲しいのでわざわざ細かく書いてます。
+		本当は無料サーバーかどこかにアップしながら、スマホでテストが一番よいよ。 */
+	}
+	nav ul li {
+		margin: 0 0 5vh 0;
+	}
+	nav a {
+		font-size: 16px;
+	}
+}
+
